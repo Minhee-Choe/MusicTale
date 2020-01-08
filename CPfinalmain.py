@@ -10,13 +10,13 @@ import re
 import numpy
 from scipy.stats import norm
 
-#악보 받아오기
+#gets sheet music 악보 받아오기
 score = corpus.parse("bach/bwv120.6.mxl")
-#악보 제목
+#title of the sheet music 악보 제목
 title= score.metadata.title
-#으뜸음 
+#main key of the music 으뜸음 
 key = score.analyze('key').name[0]
-#박자
+#tempo 박자
 tempo = score.quarterLength
 
 count = dict()
@@ -49,7 +49,7 @@ def convertTone(count, key):
             if ((ord(tone)) + conversionValue[key]) < 65:
                 convertedCount[tone+octave] = count[chr(ord(tone) + conversionValue[key]+7)+octave]
                 print(convertedCount[tone+octave])
-                #기존 옥타브보다 높은 값으로 가면 값을 낮춰준다.
+                #If the notes go higher than the base octave, lower the value기존 옥타브보다 높은 값으로 가면 값을 낮춰준다.
             elif ((ord(tone)) + conversionValue[key]) > 71:
                 convertedCount[tone+octave] = count[chr(ord(tone) + conversionValue[key]-7)+octave]
                 print(convertedCount[tone+octave])
@@ -244,7 +244,7 @@ def textspeed_mood(file_name):
     percent = norm.cdf(Z)
     percent = format(percent,'.2f')
 #percent는 상위 몇 퍼센트인지 나타내주는 것 0.xx로 나타남
-#percent는 상위 몇 퍼센트인지 나타내주는 것 0.xx로 나타남
+#percent shows how fast the speed of the novel is in a form of (.xx). The smaller the number is, the faster.
     
 # Find the mood of text
 
